@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/margen_lateral_texto"
+        android:layout_marginTop="@dimen/margen_vetical"
+        android:text="@string/perfil_bienvenida"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margen_vetical"
+        android:layout_marginLeft="@dimen/margen_lateral_texto"
+        android:layout_marginRight="@dimen/margen_lateral_texto"
+        android:stretchColumns="*" >
+    </TableRow>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="20dp"
+        android:text="@string/lista_asignaturas"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableRow1"
+        android:layout_alignLeft="@+id/tableRow1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginRight="@dimen/margen_lateral_texto"
+        android:layout_marginTop="5dp" >
+
+    </ListView>
+    
+    <TextView
+        android:id="@+id/emptyListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView2"
+        android:layout_marginLeft="@dimen/margen_lateral_texto"
+        android:layout_marginTop="5dp"
+        android:text="@string/sin_asignaturas"
+        android:visibility="gone" >
+
+    </TextView>
+
+</RelativeLayout>

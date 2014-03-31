@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_editarperfil"
+        android:showAsAction="never"
+        android:title="@string/boton_editarperfil"/>
+    <item
+        android:id="@+id/menu_gente"
+        android:showAsAction="never"
+        android:title="@string/menu_gente"/>
+    <item
+        android:id="@+id/menu_grupos"
+        android:showAsAction="never"
+        android:title="@string/menu_grupos"/>
+
+</menu>

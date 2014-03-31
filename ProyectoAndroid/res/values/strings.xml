@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings generales de la app -->
+    <string name="app_name">Exams＆Mates</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings del menú -->
+    <string name="menu_principal">Principal</string>
+    <string name="menu_editarperfil">Editar perfil</string>
+    <string name="menu_gente">Gente</string>
+    <string name="menu_grupos">Grupos</string>
+    <string name="menu_probando">Probando</string>
+    <!-- Strings para actividad LogIn -->
+    <string name="texto_bienvenida">Bienvenido a Exams＆Mates,\nla aplicación que conecta a los estudiantes.</string>
+    <string name="login_nombre">Introduce tu nombre de usuario:</string>
+    <string name="login_contr">Introduce tu contraseña:</string>
+    <string name="login_conectar">Conectar</string>
+    <string name="login_registrar"><u>¿No tienes cuenta? ¡Regístrate!</u></string>
+
+    <!-- Strings para actividad Perfil Bienvenida -->
+    <string name="perfil_bienvenida">Bienvenido a tu perfil.\n¿Qué estás estudiando ahora mismo?</string>
+    <string name="lista_asignaturas">Lista de tus asignaturas:</string>
+    <string name="sin_asignaturas">¡No tienes asignaturas marcadas!</string>
+    <string name="boton_buscar">Buscar</string>
+    <string name="boton_editarperfil">Editar perfil</string>
+    <!-- Strings para actividad Buscar -->
+    <string name="título">Usuarios encontrados</string>
+    <string name="sin_usuarios">Lo sentimos, no hay usuarios con los que contactar :(</string>
+    <!-- Strings para actividad Información de usuario -->
+    <string name="perfil_usuario_titulo">Perfil de usuario</string>
+    <string name="marcado">Esto usuario ha marcado:</string>
+    <!-- Strings para actividad Registro -->
+    <string name="title_activity_registro">Registro</string>
+    <string name="registro_usuario">Introduce tu nick de usuario</string>
+    <string name="registro_nombre">Introduce tu nombre</string>
+    <string name="registro_contra">Introduce tu contraseña</string>
+    <string name="registro_contra2">Introduce de nuevo tu contraseña</string>
+    <string name="registro_correo">Introduce tu dirección de correo electrónico</string>
+    <string name="registro_boton">Completar registro</string>
+    <string name="title_activity_dialogo">Confirmación</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>

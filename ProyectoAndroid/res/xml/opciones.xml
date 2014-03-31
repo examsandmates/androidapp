@@ -1,0 +1,43 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Información del usuario" >
+        <PreferenceScreen android:title="Seleccionar asignaturas" >
+            <CheckBoxPreference
+                android:key="TRA"
+                android:title="Ingeniería del transporte" />
+            <CheckBoxPreference
+                android:key="ELE"
+                android:title="Tecnología eléctrica" />
+            <CheckBoxPreference
+                android:key="OAE"
+                android:title="Organ. industrial y admon. de empresas" />
+            <CheckBoxPreference
+                android:key="EST"
+                android:title="Teoría de estructuras" />
+            <CheckBoxPreference
+                android:key="SII"
+                android:title="Sistemas informáticos industriales" />
+            <CheckBoxPreference
+                android:key="MOD"
+                android:title="Modelado e identificación de sistemas" />
+            <CheckBoxPreference
+                android:key="VEH"
+                android:title="Vehículos" />
+            <CheckBoxPreference
+                android:key="MAQ"
+                android:title="Máquinas hidráulicas y térmicas" />
+            <CheckBoxPreference
+                android:key="CLI"
+                android:title="Climatiación de edificios y refrigeración" />
+            <CheckBoxPreference
+                android:key="SEG"
+                android:title="Seg. industrial y Repres. gráfica de proyecto" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Información de la cuenta" >
+        <EditTextPreference
+            android:key="contrasena"
+            android:title="Cambiar contraseña" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

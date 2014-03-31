@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Configuración"
+        android:textSize="10pt" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip" >
+
+        <ListView
+            android:id="@+id/lista_asignaturas"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:drawSelectorOnTop="false" />
+
+        <TextView
+            android:id="@+id/no_asignaturas"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="No hay asignaturas disponibles" />
+    </FrameLayout>
+
+</RelativeLayout>
