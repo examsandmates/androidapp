@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.example.proyectoandroid.Grupos" >
+
+    <item
+        android:id="@+id/menu_creagrupo"
+        android:showAsAction="never"
+        android:title="@string/grupos_menu_creagrupo"/>
+    <item
+        android:id="@+id/menu_principal"
+        android:showAsAction="never"
+        android:title="@string/grupos_menu_principal"/>
+
+</menu>

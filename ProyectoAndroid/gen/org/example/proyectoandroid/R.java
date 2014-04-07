@@ -11,6 +11,7 @@ public final class R {
     public static final class array {
         public static final int asignaturasSeleccion=0x7f050001;
         public static final int asignaturasUsuario=0x7f050000;
+        public static final int spinner_lista=0x7f050002;
     }
     public static final class attr {
     }
@@ -35,65 +36,88 @@ public final class R {
         public static final int margen_vetical=0x7f060002;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int boton=0x7f020000;
+        public static final int boton1=0x7f020001;
+        public static final int botonf=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int wallpaper=0x7f020004;
     }
     public static final class id {
-        public static final int RelativeLayout1=0x7f0a000b;
-        public static final int TextView01=0x7f0a0000;
-        public static final int TextView02=0x7f0a0001;
-        public static final int TextView03=0x7f0a0002;
-        public static final int TextView04=0x7f0a0003;
-        public static final int action_settings=0x7f0a0015;
-        public static final int button1=0x7f0a0009;
-        public static final int container=0x7f0a0010;
-        public static final int editText1=0x7f0a0006;
-        public static final int editText2=0x7f0a0008;
-        public static final int editText3=0x7f0a0011;
-        public static final int editText4=0x7f0a0012;
-        public static final int editText5=0x7f0a0014;
-        public static final int emptyListView=0x7f0a000d;
-        public static final int lista_asignaturas=0x7f0a000e;
-        public static final int menu_editarperfil=0x7f0a0016;
-        public static final int menu_gente=0x7f0a0017;
-        public static final int menu_grupos=0x7f0a0018;
-        public static final int menu_principal=0x7f0a0019;
-        public static final int no_asignaturas=0x7f0a000f;
-        public static final int tableRow1=0x7f0a000c;
-        public static final int textView1=0x7f0a0004;
-        public static final int textView2=0x7f0a0005;
-        public static final int textView3=0x7f0a0007;
-        public static final int textView4=0x7f0a000a;
-        public static final int textView5=0x7f0a0013;
+        public static final int RelativeLayout1=0x7f0a0010;
+        public static final int TextView01=0x7f0a000c;
+        public static final int TextView02=0x7f0a000d;
+        public static final int TextView03=0x7f0a000e;
+        public static final int TextView04=0x7f0a000f;
+        public static final int action_settings=0x7f0a0018;
+        public static final int button1=0x7f0a000b;
+        public static final int container=0x7f0a0000;
+        public static final int editText1=0x7f0a0002;
+        public static final int editText2=0x7f0a0006;
+        public static final int editText3=0x7f0a0015;
+        public static final int editText4=0x7f0a0016;
+        public static final int editText5=0x7f0a0017;
+        public static final int emptyListView=0x7f0a0012;
+        public static final int lista_asignaturas=0x7f0a0013;
+        public static final int menu_creagrupo=0x7f0a0019;
+        public static final int menu_editarperfil=0x7f0a001b;
+        public static final int menu_gente=0x7f0a001c;
+        public static final int menu_grupos=0x7f0a001d;
+        public static final int menu_principal=0x7f0a001a;
+        public static final int no_asignaturas=0x7f0a0014;
+        public static final int spinner1=0x7f0a0004;
+        public static final int tableRow1=0x7f0a0011;
+        public static final int textView1=0x7f0a0001;
+        public static final int textView2=0x7f0a0003;
+        public static final int textView3=0x7f0a0005;
+        public static final int textView4=0x7f0a0007;
+        public static final int textView5=0x7f0a0008;
+        public static final int textView6=0x7f0a0009;
+        public static final int textView7=0x7f0a000a;
     }
     public static final class layout {
         public static final int buscar=0x7f030000;
-        public static final int info_usuario=0x7f030001;
-        public static final int log_in=0x7f030002;
-        public static final int perfil_bienvenida=0x7f030003;
-        public static final int perfil_edit=0x7f030004;
-        public static final int registro=0x7f030005;
+        public static final int grupos=0x7f030001;
+        public static final int grupos_crear=0x7f030002;
+        public static final int grupos_info=0x7f030003;
+        public static final int info_usuario=0x7f030004;
+        public static final int log_in=0x7f030005;
+        public static final int perfil_bienvenida=0x7f030006;
+        public static final int perfil_edit=0x7f030007;
+        public static final int registro=0x7f030008;
     }
     public static final class menu {
         public static final int dialogo=0x7f090000;
-        public static final int menu_bienvenida=0x7f090001;
-        public static final int menu_editarperfil=0x7f090002;
-        public static final int menu_gente=0x7f090003;
-        public static final int registro=0x7f090004;
+        public static final int grupos=0x7f090001;
+        public static final int grupos_info=0x7f090002;
+        public static final int menu_bienvenida=0x7f090003;
+        public static final int menu_editarperfil=0x7f090004;
+        public static final int menu_gente=0x7f090005;
+        public static final int picker_time=0x7f090006;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
         /**  Strings generales de la app 
          */
         public static final int app_name=0x7f070000;
-        public static final int boton_buscar=0x7f07000f;
-        public static final int boton_editarperfil=0x7f070010;
-        public static final int hello_world=0x7f07001d;
-        public static final int lista_asignaturas=0x7f07000d;
-        public static final int login_conectar=0x7f07000a;
-        public static final int login_contr=0x7f070009;
-        public static final int login_nombre=0x7f070008;
-        public static final int login_registrar=0x7f07000b;
-        public static final int marcado=0x7f070014;
+        public static final int boton_buscar=0x7f070010;
+        public static final int boton_editarperfil=0x7f070011;
+        public static final int crear=0x7f070027;
+        public static final int grupos_crear_1=0x7f070022;
+        public static final int grupos_crear_2=0x7f070023;
+        public static final int grupos_crear_3=0x7f070024;
+        public static final int grupos_crear_4=0x7f070025;
+        public static final int grupos_crear_5=0x7f070026;
+        /**  Strings para actividad Crear grupos 
+         */
+        public static final int grupos_info_titulo=0x7f070028;
+        public static final int grupos_menu_creagrupo=0x7f07001f;
+        public static final int grupos_menu_principal=0x7f070020;
+        public static final int lista_asignaturas=0x7f07000e;
+        public static final int login_conectar=0x7f07000b;
+        public static final int login_contr=0x7f07000a;
+        public static final int login_nombre=0x7f070009;
+        public static final int login_registrar=0x7f07000c;
+        public static final int marcado=0x7f070015;
         public static final int menu_editarperfil=0x7f070003;
         public static final int menu_gente=0x7f070004;
         public static final int menu_grupos=0x7f070005;
@@ -103,28 +127,35 @@ public final class R {
         public static final int menu_probando=0x7f070006;
         /**  Strings para actividad Perfil Bienvenida 
          */
-        public static final int perfil_bienvenida=0x7f07000c;
+        public static final int perfil_bienvenida=0x7f07000d;
         /**  Strings para actividad Información de usuario 
          */
-        public static final int perfil_usuario_titulo=0x7f070013;
-        public static final int registro_boton=0x7f07001b;
-        public static final int registro_contra=0x7f070018;
-        public static final int registro_contra2=0x7f070019;
-        public static final int registro_correo=0x7f07001a;
-        public static final int registro_nombre=0x7f070017;
-        public static final int registro_usuario=0x7f070016;
-        public static final int sin_asignaturas=0x7f07000e;
-        public static final int sin_usuarios=0x7f070012;
+        public static final int perfil_usuario_titulo=0x7f070014;
+        public static final int registro_boton=0x7f07001c;
+        public static final int registro_contra=0x7f070019;
+        public static final int registro_contra2=0x7f07001a;
+        public static final int registro_correo=0x7f07001b;
+        public static final int registro_nombre=0x7f070018;
+        public static final int registro_usuario=0x7f070017;
+        public static final int sin_asignaturas=0x7f07000f;
+        public static final int sin_usuarios=0x7f070013;
         /**  Strings para actividad LogIn 
          */
-        public static final int texto_bienvenida=0x7f070007;
-        public static final int title_activity_dialogo=0x7f07001c;
+        public static final int texto_bienvenida=0x7f070008;
+        public static final int title_activity_dialogo=0x7f07001d;
+        /**  Strings para actividad Grupos 
+         */
+        public static final int title_activity_grupos=0x7f07001e;
+        /**  Strings para actividad Crear grupos 
+         */
+        public static final int title_activity_grupos_crear=0x7f070021;
         /**  Strings para actividad Registro 
          */
-        public static final int title_activity_registro=0x7f070015;
+        public static final int title_activity_registro=0x7f070016;
         /**  Strings para actividad Buscar 
          */
-        public static final int título=0x7f070011;
+        public static final int título=0x7f070012;
+        public static final int volver=0x7f070007;
     }
     public static final class style {
         /** 

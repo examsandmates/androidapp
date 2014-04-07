@@ -4,12 +4,15 @@
     <!-- Strings generales de la app -->
     <string name="app_name">Exams＆Mates</string>
     <string name="action_settings">Settings</string>
+
     <!-- Strings del menú -->
     <string name="menu_principal">Principal</string>
     <string name="menu_editarperfil">Editar perfil</string>
     <string name="menu_gente">Gente</string>
     <string name="menu_grupos">Grupos</string>
     <string name="menu_probando">Probando</string>
+    <string name="volver">Actualizar datos y volver</string>
+
     <!-- Strings para actividad LogIn -->
     <string name="texto_bienvenida">Bienvenido a Exams＆Mates,\nla aplicación que conecta a los estudiantes.</string>
     <string name="login_nombre">Introduce tu nombre de usuario:</string>
@@ -23,21 +26,41 @@
     <string name="sin_asignaturas">¡No tienes asignaturas marcadas!</string>
     <string name="boton_buscar">Buscar</string>
     <string name="boton_editarperfil">Editar perfil</string>
+
     <!-- Strings para actividad Buscar -->
     <string name="título">Usuarios encontrados</string>
     <string name="sin_usuarios">Lo sentimos, no hay usuarios con los que contactar :(</string>
+
     <!-- Strings para actividad Información de usuario -->
     <string name="perfil_usuario_titulo">Perfil de usuario</string>
     <string name="marcado">Esto usuario ha marcado:</string>
+
     <!-- Strings para actividad Registro -->
     <string name="title_activity_registro">Registro</string>
-    <string name="registro_usuario">Introduce tu nick de usuario</string>
-    <string name="registro_nombre">Introduce tu nombre</string>
-    <string name="registro_contra">Introduce tu contraseña</string>
-    <string name="registro_contra2">Introduce de nuevo tu contraseña</string>
-    <string name="registro_correo">Introduce tu dirección de correo electrónico</string>
-    <string name="registro_boton">Completar registro</string>
+    <string name="registro_usuario">Introduce tu nick de usuario:</string>
+    <string name="registro_nombre">Introduce tu nombre:</string>
+    <string name="registro_contra">Introduce tu contraseña:</string>
+    <string name="registro_contra2">Introduce de nuevo tu contraseña:</string>
+    <string name="registro_correo">Introduce tu dirección de correo electrónico:</string>
+    <string name="registro_boton">Registrarse</string>
     <string name="title_activity_dialogo">Confirmación</string>
-    <string name="hello_world">Hello world!</string>
+
+    <!-- Strings para actividad Grupos -->
+    <string name="title_activity_grupos">Grupos de estudio</string>
+    <string name="grupos_menu_creagrupo">Crear grupo de estudio</string>
+    <string name="grupos_menu_principal">Principal</string>
+
+    <!-- Strings para actividad Crear grupos -->
+    <string name="title_activity_grupos_crear">Grupos_crear</string>
+    <string name="grupos_crear_1">Introduce un nombre para el grupo:</string>
+    <string name="grupos_crear_2">¿Qué vais a estudiar?</string>
+    <string name="grupos_crear_3">¿Dónde vais a quedar?</string>
+    <string name="grupos_crear_4"><u>¿Qué día?</u> (dd/mm/aaaa)</string>
+    <string name="grupos_crear_5"><u>¿A qué hora?</u></string>
+    <string name="crear">Crear grupo</string>
+
+    <!-- Strings para actividad Crear grupos -->
+    <string name="grupos_info_titulo">Información del grupo</string>
+
 
 </resources>

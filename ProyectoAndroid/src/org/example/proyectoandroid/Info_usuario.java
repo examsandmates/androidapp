@@ -16,7 +16,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.R.color;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;

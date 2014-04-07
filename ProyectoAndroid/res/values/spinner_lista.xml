@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="spinner_lista">
+        <item>Ingenieria del transporte</item>
+        <item>Tecnologia electrica</item>
+        <item>Empresas</item>
+        <item>Teoria de estructuras</item>
+        <item>Sistemas informaticos industriales</item>
+        <item>Modeloado e ident. de sistemas</item>
+        <item>Vehiculos</item>
+        <item>Maquinas hidraulicas y termicas</item>
+        <item>Climatizacion de edif. y refrigeracion</item>
+        <item>Seguridad industrial y representacion</item>
+    </string-array>
+
+</resources>

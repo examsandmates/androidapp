@@ -18,10 +18,12 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,39 +33,53 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Log_in extends Activity {
-	//Definimos el objeto de ventana de progreso
+	// Ventana de progreso
 	ProgressDialog dialog;
 
-	// Método que crea el layout.
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.log_in);
 	}
 
-	// Método que ejecuta el botón "Conectar"
+	// Método ejecutado por el botón "Conectar"
+	@SuppressLint("HandlerLeak")
 	public void lanzarPerfilBienvenida(View view) {
-		Context context;
-		Intent intent;
-		// Creamos el handler
+		// Handler
 		Handler handler = new Handler() {
+			@SuppressWarnings("static-access")
 			@Override
 			public void handleMessage(Message msg) {
 				String nombres = msg.getData().getString("STATUS");
 				Log.d("Amigo", "EL STATUS DE COMPROBACION ES:" + nombres);
+
 				if (nombres.equals("si")) {
 					Intent perfilbienv = new Intent(Log_in.this,
 							Perfil_bienvenida.class);
 					perfilbienv.addFlags(perfilbienv.FLAG_ACTIVITY_CLEAR_TOP);
 					perfilbienv.addFlags(perfilbienv.FLAG_ACTIVITY_SINGLE_TOP);
-					// Pasamos el nombre de usuario activo a la siguente
-					// activity
+
+					/*
+					 * Pasamos el nombre de usuario activo a la siguente
+					 * activity
+					 */
+
 					EditText user = (EditText) findViewById(R.id.editText1);
 					String consulta_user = (String) user.getText().toString();
 					perfilbienv.putExtra("USUARIO", consulta_user);
-					Log.d("Amigo", "Enviando desde LOG IN " + consulta_user);
+
+					// TODO Hecho con sahredpreferences
+					SharedPreferences prefs = getSharedPreferences(
+							"MiUsuario", Context.MODE_PRIVATE);
+					SharedPreferences.Editor editor = prefs.edit();
+					editor.putString("user_activo", consulta_user);
+					editor.commit();
+					//TODO Hecho con sharedpreferences
+
 					dialog.dismiss();
+
 					startActivity(perfilbienv);
+
 				} else {
 					dialog.dismiss();
 					Toast toast = Toast.makeText(getApplicationContext(),
@@ -72,32 +88,33 @@ public class Log_in extends Activity {
 				}
 			}
 		};
+
 		// Recupero el texto de los "editText"
 		EditText user = (EditText) findViewById(R.id.editText1);
 		String consulta_user = (String) user.getText().toString();
 		EditText pass = (EditText) findViewById(R.id.editText2);
 		String no_cod_pass = (String) pass.getText().toString();
+
 		// Muestro Toast si alguno de los campos no está relleno
 		if ((consulta_user.length() == 0) || (no_cod_pass.length() == 0)) {
 			Toast toast = Toast.makeText(getApplicationContext(),
 					"Nombre o contraseña no introducidos", Toast.LENGTH_LONG);
 			toast.show();
 		} else {
-			// Ahora codifico el pass
+
+			// Codificamos el pass
 			String consulta_pass = md5(no_cod_pass);
-			// PROGRESSDIALOG
-			dialog = ProgressDialog.show(Log_in.this, "", "Conectando con el servidor",true);
+
+			dialog = ProgressDialog.show(Log_in.this, "",
+					"Conectando con el servidor", true);
 			dialog.setCancelable(true);
-			// Llama al thread de conexión con el servidor
+
+			// Thread de conexión con el servidor
 			HTTPThread t = new HTTPThread(consulta_user, consulta_pass, handler);
 			t.start();
-			// Intent perfilbienv = new Intent(this, Perfil_bienvenida.class);
-			// startActivity(perfilbienv);
-			// }
 		}
 	}
 
-	// Método que codifica nuestro pass antes de enviarlo
 	public static String md5(String s) {
 		MessageDigest digest;
 		try {
@@ -111,7 +128,7 @@ public class Log_in extends Activity {
 		return "";
 	}
 
-	// Método que lanza la pantalla de registro
+	// Método ejecutado por el texto "Regístrate"
 	public void lanzarRegistro(View view) {
 		Intent registro = new Intent(this, Registro.class);
 		startActivity(registro);
@@ -122,7 +139,6 @@ public class Log_in extends Activity {
 		moveTaskToBack(true);
 	}
 
-	/* Creamos nuestra clase HTTPThread */
 	class HTTPThread extends Thread {
 		String consulta_user;
 		String consulta_pass;
@@ -136,33 +152,30 @@ public class Log_in extends Activity {
 
 		@Override
 		public void run() {
-			// Pareja nombre-valor con la que paso el usuario a la petición
-			Log.d("Amigo", "Empezando el thread");
-			Log.d("Amigo", "User" + consulta_user);
-			Log.d("Amigo", "Pass" + consulta_pass);
+			// nameValuePair con la que paso el usuario a la petición
+			Log.d("Probando", "Empezando el thread");
+			Log.d("Probando", "User" + consulta_user);
+			Log.d("Probando", "Pass" + consulta_pass);
+
 			ArrayList<NameValuePair> nameValuePair;
 			nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair.add(new BasicNameValuePair("CONSULTA_USUARIO",
 					consulta_user));
 			nameValuePair.add(new BasicNameValuePair("CONSULTA_PASS",
 					consulta_pass));
-			Log.d("Amigo", "Dentro del try" + consulta_pass);
-			// Comenzamos la conexión
+
+			// Objeto HttpClient
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(
 					"http://examsandmates.web44.net/examapp/Login.php");
+
 			try {
-				Log.d("B", "Dentro del try");
-				// Añadimos el nameValuePair al POST, dentro del try porque
-				// puede dar una excepcion
 				post.setEntity(new UrlEncodedFormEntity(nameValuePair));
 				HttpResponse response = client.execute(post);
 				if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(response.getEntity()
 									.getContent()));
-					// COMENTO DE AQUÍ EN ADELANTE PORQUE PARA EL LOGIN MI
-					// RESPUESTA SERÁ DISTINTA
 
 					String resp = "";
 					String linea;
@@ -171,29 +184,16 @@ public class Log_in extends Activity {
 						resp += linea;
 					}
 
-					Log.d("Amigo", "resp= " + resp);
-
-					// A partir del string "resp", creamos el JSONArray, del que
-					// vamos "separando" cada JSONObject que lo compone. A su
-					// vez, de cada JSONObject extraemos el string del valor con
-					// nombre "user", y vamos rellenando el array de string
-					// "NOMBRES"
+					Log.d("Probando", "resp= " + resp);
 
 					JSONArray json = new JSONArray(resp);
-
+					JSONObject js = json.getJSONObject(0);
 					String nombres;
 
-					JSONObject js = json.getJSONObject(0);
 					nombres = js.getString("status");
 					Log.d("Amigo", "Status devuelto: " + nombres);
-					// for (int i = 1; i < json.length(); i++) {
-					// JSONObject js2 = json.getJSONObject(i);
-					// nombres[i - 1] = js2.getString("subj");
-					// Log.d("ASIGNATURAS", nombres[i - 1]);
-					// }
 
-					// No podemos pasar cualquier mensaje al handler, así que
-					// obtenemos con "obtainMessage"
+					// Mensaje para el handler
 					Message msg = handler.obtainMessage();
 					Bundle bundle = new Bundle();
 					bundle.putString("STATUS", nombres);

@@ -16,7 +16,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,9 +29,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class Buscar extends ListActivity {
+	ProgressDialog dialog;
 	String[] nombres;
 
 	@Override
@@ -47,12 +50,19 @@ public class Buscar extends ListActivity {
 				 * Sacamos el array "NOMBRES" del mensaje enviado al handler.
 				 * Con "NOMBRES" creamos la listview
 				 */
+				dialog.dismiss();
+				
 				String[] nombres = msg.getData().getStringArray("NOMBRES");
 
 				setListAdapter(new ArrayAdapter<String>(Buscar.this,
 						android.R.layout.simple_list_item_1, nombres));
 			}
 		};
+		
+		dialog = ProgressDialog.show(Buscar.this, "",
+				"Conectando con el servidor", true);
+		dialog.setCancelable(true);
+		
 		/* Iniciamos el thread cliente */
 		HTTPThread t = new HTTPThread(nombres, handler);
 		t.start();
@@ -88,9 +98,8 @@ public class Buscar extends ListActivity {
 			startActivity(perfiledit);
 			return true;
 		case R.id.menu_grupos:
-			Toast toast = Toast.makeText(getApplicationContext(),
-					"Próximamente...", Toast.LENGTH_SHORT);
-			toast.show();
+			Intent grupos = new Intent(this, Grupos.class);
+			startActivity(grupos);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -119,9 +128,12 @@ public class Buscar extends ListActivity {
 			 * parte del mensaje que mandaremos al handler.
 			 */
 			Log.d("A", "Empezando el thread");
-			// Recibimos el nombre de usuario de la activity anterior
-			Bundle bundle2 = getIntent().getExtras();
-			String Usuario = bundle2.getString("USUARIO");
+			//Recibimos el nombre de usuario de las sharedpreferences
+			SharedPreferences prefs = getSharedPreferences("MiUsuario",
+					Context.MODE_PRIVATE);
+			String Usuario = prefs
+					.getString("user_activo", "por_defecto@email.com");
+			Log.d("Probando", "Usuario activo por shared: " + Usuario);
 
 			ArrayList<NameValuePair> nameValuePair;
 			nameValuePair = new ArrayList<NameValuePair>();

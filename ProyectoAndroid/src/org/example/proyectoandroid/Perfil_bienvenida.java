@@ -21,17 +21,15 @@ public class Perfil_bienvenida extends ListActivity {
 		setContentView(R.layout.perfil_bienvenida);
 	}
 
-	// En onResume tenemos el código que actualiza la listview cada vez que
-	// entramos a Perfil_editar y pulsamos "atrás".
 	@Override
 	protected void onResume() {
 		int contador = 0;
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		// Todo el código siguente lee el archivo de preferencias y carga en
-		// lista las asignaturas marcadas
 
-		// Comprobamos qué cantidad de asignaturas tenemos marcadas
+		// Lectura de las preferencias y carga de las asignaturas marcadas
+
+		// Comprobamos la cantidad de asignaturas marcadas
 		if (pref.getBoolean("TRA", false))
 			contador++;
 		if (pref.getBoolean("ELE", false))
@@ -52,14 +50,17 @@ public class Perfil_bienvenida extends ListActivity {
 			contador++;
 		if (pref.getBoolean("SEG", false))
 			contador++;
-		// Creamos el vector de strings
+
 		String[] asignaturas = new String[contador];
-		// Si no tenemos asignaturas, asignamos un texto
+
+		// Texto asignado si no hay asignaturas marcadas
+
 		if (contador == 0) {
 			ListView lv = getListView();
 			lv.setEmptyView(findViewById(R.id.emptyListView));
 		}
-		// Si tenemos asignaturas, rellenamos el array
+
+		// Completamos el array si hay asignaturas marcadas
 		else {
 			int aux = 0;
 			while (aux < contador) {
@@ -115,10 +116,10 @@ public class Perfil_bienvenida extends ListActivity {
 				}
 			}
 		}
-		// Creamos la listview con el vector de strings
+
+		// Listview a partir del array de strings
 		setListAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.test_list_item, asignaturas));
-
 		super.onResume();
 	}
 
@@ -129,15 +130,12 @@ public class Perfil_bienvenida extends ListActivity {
 		dialogo.show(fragmentManager, "tagAlerta");
 	}
 
-	// Creamos el desplegable de opciones
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_bienvenida, menu);
 		return true;
 	}
 
-	// Damos acciones a las opciones
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -146,21 +144,17 @@ public class Perfil_bienvenida extends ListActivity {
 			Intent perfiledit = new Intent(this, Perfil_editar.class);
 			startActivity(perfiledit);
 			return true;
+
 		case R.id.menu_gente:
 			Intent intentbuscar = new Intent(this, Buscar.class);
-			// Recibimos el usuario de la activity anterior
-			Bundle bundle = getIntent().getExtras();
-			String Usuario = bundle.getString("USUARIO");
-			Log.d("Amigo", "Recibiendo de LOG IN Y ENVIANDO A BUSCAR: "
-					+ Usuario);
-			intentbuscar.putExtra("USUARIO", Usuario);
 			startActivity(intentbuscar);
 			return true;
+
 		case R.id.menu_grupos:
-			Toast toast = Toast.makeText(getApplicationContext(),
-					"Próximamente...", Toast.LENGTH_SHORT);
-			toast.show();
+			Intent grupos = new Intent(this, Grupos.class);
+			startActivity(grupos);
 			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}

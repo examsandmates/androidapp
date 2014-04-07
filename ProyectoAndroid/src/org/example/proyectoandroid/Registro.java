@@ -19,19 +19,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class Registro extends Activity {
+	// TODO Ventana de progreso
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +51,20 @@ public class Registro extends Activity {
 				String nombres = msg.getData().getString("STATUS");
 
 				if (nombres.equals("si")) {
+					// TODO
+					dialog.dismiss();
+
 					Toast toast = Toast.makeText(getApplicationContext(),
 							"El registro se ha completado correctamente",
 							Toast.LENGTH_LONG);
 					toast.show();
 
-					Intent intent = new Intent(Registro.this,
-							Log_in.class);
+					Intent intent = new Intent(Registro.this, Log_in.class);
 					startActivity(intent);
 				} else {
+					// TODO
+					dialog.dismiss();
+					
 					Toast toast = Toast.makeText(getApplicationContext(),
 							"No se ha completado correctamente el registro",
 							Toast.LENGTH_LONG);
@@ -100,31 +106,17 @@ public class Registro extends Activity {
 		// Codificamos la contraseña y mandamos los datos a servidor
 		else {
 			String pass_md5 = md5(consulta_pass1);
+
+			// TODO hola amigo k ase amigo k ase amigo
+			dialog = ProgressDialog.show(Registro.this, "",
+					"Conectando con el servidor", true);
+			dialog.setCancelable(true);
+
 			Log.d("Amigo", "VAMOS A INICIAR EL THREAD!!");
 			HTTPThread t = new HTTPThread(consulta_nick, consulta_nombre,
 					consulta_mail, pass_md5, handler);
 			t.start();
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.registro, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	public static String md5(String s) {
