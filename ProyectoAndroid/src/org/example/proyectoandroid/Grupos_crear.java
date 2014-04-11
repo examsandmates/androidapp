@@ -43,6 +43,7 @@ public class Grupos_crear extends Activity {
 	// Variables tipo View para elegir y mostrar fecha y hora
 	private TextView displayTime, pickTime, pDisplayDate, pPickDate;
 	private int pHour, pMinute, pDay, pMonth, pYear;
+	
 	// Identificadores para elegir fecha u hora
 	static final int TIME_DIALOG_ID = 0;
 	static final int DATE_DIALOG_ID = 1;
@@ -55,6 +56,7 @@ public class Grupos_crear extends Activity {
 			updateDisplay();
 		}
 	};
+	
 	//Accion a realizar cuando se elige una fecha
 	private DatePickerDialog.OnDateSetListener pDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -64,6 +66,7 @@ public class Grupos_crear extends Activity {
 			pMonth = monthOfYear;
 			pDay = dayOfMonth;
 			updateDisplayDate();
+			
 		}
 	};
 
@@ -189,12 +192,6 @@ public class Grupos_crear extends Activity {
 		String consulta_creador = prefs.getString("user_activo",
 				"por_defecto@email.com");
 
-		Log.d("Probando", "Comprobando:" + consulta_nombre);
-		Log.d("Probando", "Comprobando:" + consulta_asign);
-		Log.d("Probando", "Comprobando:" + consulta_creador);
-		Log.d("Probando", "Comprobando:" + consulta_fecha);
-		Log.d("Probando", "Comprobando:" + consulta_hora);
-
 		// Comprobamos si hay algún campo vacío
 		if ((consulta_nombre.length() == 0) || (consulta_asign.length() == 0)
 				|| (consulta_lugar.length() == 0)) {
@@ -236,6 +233,7 @@ public class Grupos_crear extends Activity {
 		public void run() {
 			// Parejas nombre-valor con las que paso los datos al servidor
 			ArrayList<NameValuePair> nameValuePair;
+			
 			nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair
 					.add(new BasicNameValuePair("CONSULTA_NOMBRE", nombre));
@@ -251,16 +249,17 @@ public class Grupos_crear extends Activity {
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(
 					"http://examsandmates.web44.net/examapp/CrGrupo.php");
+			
 			try {
 				Log.d("Probando", "Dentro del try");
-				// Añadimos el nameValuePair al POST, dentro del try porque
-				// puede dar una excepcion
+			
 				post.setEntity(new UrlEncodedFormEntity(nameValuePair));
 				HttpResponse response = client.execute(post);
 				if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(response.getEntity()
 									.getContent()));
+					
 					// Tomamos la respuesta del servdor
 					String resp = "";
 					String linea;
@@ -288,7 +287,6 @@ public class Grupos_crear extends Activity {
 					handler.sendMessage(msg);
 				}
 			} catch (Exception e) {
-				// TODO
 			}
 		}
 	}

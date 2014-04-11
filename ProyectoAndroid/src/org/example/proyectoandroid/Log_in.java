@@ -45,13 +45,12 @@ public class Log_in extends Activity {
 	// Método ejecutado por el botón "Conectar"
 	@SuppressLint("HandlerLeak")
 	public void lanzarPerfilBienvenida(View view) {
-		// Handler
+
 		Handler handler = new Handler() {
 			@SuppressWarnings("static-access")
 			@Override
 			public void handleMessage(Message msg) {
 				String nombres = msg.getData().getString("STATUS");
-				Log.d("Amigo", "EL STATUS DE COMPROBACION ES:" + nombres);
 
 				if (nombres.equals("si")) {
 					Intent perfilbienv = new Intent(Log_in.this,
@@ -59,23 +58,20 @@ public class Log_in extends Activity {
 					perfilbienv.addFlags(perfilbienv.FLAG_ACTIVITY_CLEAR_TOP);
 					perfilbienv.addFlags(perfilbienv.FLAG_ACTIVITY_SINGLE_TOP);
 
-					/*
-					 * Pasamos el nombre de usuario activo a la siguente
-					 * activity
-					 */
+					// Pasamos el nombre de usuario activo a la siguente
+					// activity
 
 					EditText user = (EditText) findViewById(R.id.editText1);
 					String consulta_user = (String) user.getText().toString();
 					perfilbienv.putExtra("USUARIO", consulta_user);
 
-					// TODO Hecho con sahredpreferences
-					SharedPreferences prefs = getSharedPreferences(
-							"MiUsuario", Context.MODE_PRIVATE);
+					//Guardamos este dato en las preferencias del dispositivo
+					SharedPreferences prefs = getSharedPreferences("MiUsuario",
+							Context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = prefs.edit();
 					editor.putString("user_activo", consulta_user);
 					editor.commit();
-					//TODO Hecho con sharedpreferences
-
+					
 					dialog.dismiss();
 
 					startActivity(perfilbienv);
@@ -89,13 +85,13 @@ public class Log_in extends Activity {
 			}
 		};
 
-		// Recupero el texto de los "editText"
+		// Recupero el texto de los editText
 		EditText user = (EditText) findViewById(R.id.editText1);
 		String consulta_user = (String) user.getText().toString();
 		EditText pass = (EditText) findViewById(R.id.editText2);
 		String no_cod_pass = (String) pass.getText().toString();
 
-		// Muestro Toast si alguno de los campos no está relleno
+		// Muestro Toast si alguno de los campos no esta relleno
 		if ((consulta_user.length() == 0) || (no_cod_pass.length() == 0)) {
 			Toast toast = Toast.makeText(getApplicationContext(),
 					"Nombre o contraseña no introducidos", Toast.LENGTH_LONG);
@@ -152,11 +148,8 @@ public class Log_in extends Activity {
 
 		@Override
 		public void run() {
+			
 			// nameValuePair con la que paso el usuario a la petición
-			Log.d("Probando", "Empezando el thread");
-			Log.d("Probando", "User" + consulta_user);
-			Log.d("Probando", "Pass" + consulta_pass);
-
 			ArrayList<NameValuePair> nameValuePair;
 			nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair.add(new BasicNameValuePair("CONSULTA_USUARIO",
@@ -164,7 +157,6 @@ public class Log_in extends Activity {
 			nameValuePair.add(new BasicNameValuePair("CONSULTA_PASS",
 					consulta_pass));
 
-			// Objeto HttpClient
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(
 					"http://examsandmates.web44.net/examapp/Login.php");

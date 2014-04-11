@@ -40,9 +40,10 @@ public class Buscar extends ListActivity {
 		setContentView(R.layout.buscar);
 
 		/*
-		 * Creamos en handler, con el que comunicamos el thread cliente con el
+		 * Creamos el handler, con el que comunicamos el thread cliente con el
 		 * thread principal. También es el que crea la listview.
 		 */
+
 		Handler handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
@@ -51,18 +52,18 @@ public class Buscar extends ListActivity {
 				 * Con "NOMBRES" creamos la listview
 				 */
 				dialog.dismiss();
-				
+
 				String[] nombres = msg.getData().getStringArray("NOMBRES");
 
 				setListAdapter(new ArrayAdapter<String>(Buscar.this,
 						android.R.layout.simple_list_item_1, nombres));
 			}
 		};
-		
+
 		dialog = ProgressDialog.show(Buscar.this, "",
 				"Conectando con el servidor", true);
 		dialog.setCancelable(true);
-		
+
 		/* Iniciamos el thread cliente */
 		HTTPThread t = new HTTPThread(nombres, handler);
 		t.start();
@@ -118,38 +119,31 @@ public class Buscar extends ListActivity {
 
 		@Override
 		public void run() {
-			/*
-			 * Creamos el HTTPClient, ejecutamos POST en la url especificada,
-			 * cogemos la respuesta (comprobamos que la comunicación ha sido
-			 * correcta y leemos el contenido que nos interesa de la respuesta),
-			 * a través del bufferedreader rellenamos un string, con el que
-			 * creamos el JSONArray, luego el JSONObject, y partir de este
-			 * último, el string "NOMBRES". Por último, pasamos este string como
-			 * parte del mensaje que mandaremos al handler.
-			 */
-			Log.d("A", "Empezando el thread");
-			//Recibimos el nombre de usuario de las sharedpreferences
+
+			// Recibimos el nombre de usuario de las sharedpreferences
 			SharedPreferences prefs = getSharedPreferences("MiUsuario",
 					Context.MODE_PRIVATE);
-			String Usuario = prefs
-					.getString("user_activo", "por_defecto@email.com");
-			Log.d("Probando", "Usuario activo por shared: " + Usuario);
+			String Usuario = prefs.getString("user_activo",
+					"por_defecto@email.com");
 
 			ArrayList<NameValuePair> nameValuePair;
 			nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair.add(new BasicNameValuePair("CONSULTA_USUARIO",
 					Usuario));
+
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(
 					"http://examsandmates.web44.net/examapp/Gente2.php");
 			try {
-				Log.d("B", "Dentro del try");
+
 				post.setEntity(new UrlEncodedFormEntity(nameValuePair));
 				HttpResponse response = client.execute(post);
+
 				if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(response.getEntity()
 									.getContent()));
+
 					String resp = "";
 					String linea;
 
@@ -157,15 +151,6 @@ public class Buscar extends ListActivity {
 						resp += linea;
 					}
 
-					Log.d("Mitchel", "resp= " + resp);
-
-					/*
-					 * A partir del string "resp", creamos el JSONArray, del que
-					 * vamos "separando" cada JSONObject que lo compone. A su
-					 * vez, de cada JSONObject extraemos el string del valor con
-					 * nombre "user", y vamos rellenando el array de strings
-					 * "NOMBRES"
-					 */
 					JSONArray json = new JSONArray(resp);
 
 					nombres = new String[json.length()];
@@ -175,6 +160,7 @@ public class Buscar extends ListActivity {
 						nombres[i] = js.getString("user");
 						Log.d("NOMBRE", nombres[i]);
 					}
+
 					/*
 					 * No podemos pasar cualquier mensaje al handler, así que lo
 					 * obtenemos con "obtainMessage"
@@ -186,7 +172,6 @@ public class Buscar extends ListActivity {
 					handler.sendMessage(msg);
 				}
 			} catch (Exception e) {
-				// TODO
 			}
 		}
 	}

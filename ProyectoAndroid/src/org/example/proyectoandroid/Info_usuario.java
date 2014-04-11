@@ -41,9 +41,11 @@ public class Info_usuario extends ListActivity {
 		setContentView(R.layout.info_usuario);
 
 		TextView texto;
+		
 		// Recibimos el nombre de usuario de la actividad anterior
 		Bundle bundle = getIntent().getExtras();
 		String Usuario = bundle.getString("USUARIO");
+		
 		// Mostramos por pantalla de qué usuario es el perfil
 		texto = (TextView) findViewById(R.id.TextView01);
 		texto.setText("Este es el perfil de " + Usuario);
@@ -51,16 +53,19 @@ public class Info_usuario extends ListActivity {
 		Handler handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
+				
 				String[] nombres = msg.getData().getStringArray("NOMBRES");
 				String usuario_nombre = msg.getData().getString(
 						"USUARIO_NOMBRE");
 				String usuario_contacto = msg.getData().getString(
 						"USUARIO_CONTACTO");
+				
 				// Mostramos por pantalla el nombre de usuario
 				TextView texto_nombre_usuario;
 				texto_nombre_usuario = (TextView) findViewById(R.id.TextView02);
 				texto_nombre_usuario.setText("Nombre de usuario: "
 						+ usuario_nombre);
+				
 				// Mostramos por pantalla el mail de contacto
 				TextView texto_contacto_usuario;
 				texto_contacto_usuario = (TextView) findViewById(R.id.TextView03);
@@ -69,8 +74,6 @@ public class Info_usuario extends ListActivity {
 				texto_contacto_usuario.setTextColor(Color.WHITE);
 
 				// Mostramos por pantalla una listview con sus asignaturas
-				// Me da error al intentar mostrar el StringArray "nombres"
-				// directamente. No sé por qué.
 				int tam = nombres.length;
 				String[] asignaturas = new String[tam - 1];
 				for (int i = 0; i < tam - 1; i++) {
@@ -95,10 +98,12 @@ public class Info_usuario extends ListActivity {
 				.putExtra(android.content.Intent.EXTRA_TEXT,
 						"¡Hola! Te he encontrado con Exams&Mates y quiero contactar contigo.");
 		emailIntent.setType("message/rfc822");
+		
 		final PackageManager pm = getPackageManager();
 		final List<ResolveInfo> matches = pm.queryIntentActivities(emailIntent,
 				0);
 		ResolveInfo best = null;
+		
 		for (final ResolveInfo info : matches)
 			if (info.activityInfo.packageName.endsWith(".gm")
 					|| info.activityInfo.name.toLowerCase().contains("gmail"))
@@ -122,22 +127,22 @@ public class Info_usuario extends ListActivity {
 
 		@Override
 		public void run() {
-			// Pareja nombre-valor con la que paso el usuario a la petición
-			Log.d("A", "Empezando el thread");
+			
+			// Pareja nombre-valor con la que paso el usuario a la peticion
 			ArrayList<NameValuePair> nameValuePair;
 			nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair.add(new BasicNameValuePair("CONSULTA_USUARIO",
 					consulta));
+			
 			// Comenzamos la conexión
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(
 					"http://examsandmates.web44.net/examapp/DatosUser.php");
+			
 			try {
-				Log.d("B", "Dentro del try");
-				// Añadimos el nameValuePair al POST, dentro del try porque
-				// puede dar una excepcion
 				post.setEntity(new UrlEncodedFormEntity(nameValuePair));
 				HttpResponse response = client.execute(post);
+				
 				if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(response.getEntity()
@@ -150,25 +155,13 @@ public class Info_usuario extends ListActivity {
 						resp += linea;
 					}
 
-					Log.d("C", "resp= " + resp);
-
-					/*
-					 * A partir del string "resp", creamos el JSONArray, del que
-					 * vamos "separando" cada JSONObject que lo compone. A su
-					 * vez, de cada JSONObject extraemos el string del valor con
-					 * nombre "user", y vamos rellenando el array de strings
-					 * "NOMBRES"
-					 */
 					JSONArray json = new JSONArray(resp);
 
 					String[] nombres = new String[json.length()];
-					Log.d("OBJETOS JSON", "El número es: " + json.length());
 
 					JSONObject js = json.getJSONObject(0);
 					usuario_nombre = js.getString("name");
 					usuario_contacto = js.getString("email");
-					Log.d("NOMBRE", usuario_nombre);
-					Log.d("EMAIL", usuario_contacto);
 
 					for (int i = 1; i < json.length(); i++) {
 						JSONObject js2 = json.getJSONObject(i);
@@ -176,8 +169,6 @@ public class Info_usuario extends ListActivity {
 						Log.d("ASIGNATURAS", nombres[i - 1]);
 					}
 
-					// No podemos pasar cualquier mensaje al handler, así que lo
-					// obtenemos con "obtainMessage"
 					Message msg = handler.obtainMessage();
 					Bundle bundle = new Bundle();
 					bundle.putString("USUARIO_NOMBRE", usuario_nombre);
@@ -188,7 +179,6 @@ public class Info_usuario extends ListActivity {
 
 				}
 			} catch (Exception e) {
-				// TODO
 			}
 		}
 	}

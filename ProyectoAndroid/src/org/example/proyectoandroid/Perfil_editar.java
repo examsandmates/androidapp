@@ -9,6 +9,7 @@ import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class Perfil_editar extends FragmentActivity {
+
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +51,8 @@ public class Perfil_editar extends FragmentActivity {
 
 		case R.id.menu_principal:
 			onBackPressed();
-			//Intent perfilbienv = new Intent(this, Perfil_bienvenida.class);
-			//startActivity(perfilbienv);
 			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 
@@ -58,13 +60,15 @@ public class Perfil_editar extends FragmentActivity {
 	}
 
 	public void onBackPressed() {
-		// TODO Completar el Handler
 		Handler handler = new Handler() {
 			public void handleMessage(Message msg) {
+
 				String actualizado = msg.getData().getString("RESPUESTA");
-				Log.d("Probando", "EL STATUS DE ACTUALIZAR PERFIL ES:"
-						+ actualizado);
+
 				if (actualizado.equals("si")) {
+
+					dialog.dismiss();
+
 					Intent perfilbienv = new Intent(Perfil_editar.this,
 							Perfil_bienvenida.class);
 					startActivity(perfilbienv);
@@ -170,12 +174,15 @@ public class Perfil_editar extends FragmentActivity {
 			}
 		}
 
-		// Obtengo el usuario activo con las sharedpreferences
+		// Obtengo el usuario activo de las sharedpreferences
 		SharedPreferences prefs = getSharedPreferences("MiUsuario",
 				Context.MODE_PRIVATE);
 		String usuario = prefs
 				.getString("user_activo", "por_defecto@email.com");
-		Log.d("Probando", "Usuario activo por shared: " + usuario);
+
+		dialog = ProgressDialog.show(Perfil_editar.this, "",
+				"Conectando con el servidor", true);
+		dialog.setCancelable(true);
 
 		HTTPThread t = new HTTPThread(aux, asignaturas, id_asignaturas,
 				usuario, handler);
@@ -188,8 +195,6 @@ public class Perfil_editar extends FragmentActivity {
 		String[] id_asignaturas;
 		String usuario;
 		Handler handler;
-
-		// Handler handler;
 
 		public HTTPThread(int cont, String[] asig, String[] id_asig,
 				String user, Handler h) {
@@ -225,14 +230,14 @@ public class Perfil_editar extends FragmentActivity {
 				HttpURLConnection con = (HttpURLConnection) obj
 						.openConnection();
 
-				// Add reuqest header
+				// Cabeceras
 				con.setRequestMethod("POST");
 				con.setRequestProperty("User-Agent", "Mozilla/5.0");
 				con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
 				String urlParameters = "Mensaje=" + consultaJson.toString();
 
-				// Send post request
+				// Enviar peticion POST
 				con.setDoOutput(true);
 				DataOutputStream wr = new DataOutputStream(
 						con.getOutputStream());
@@ -259,10 +264,10 @@ public class Perfil_editar extends FragmentActivity {
 				JSONArray json = new JSONArray(response.toString());
 				JSONObject js = json.getJSONObject(0);
 				String resp_act = js.getString("status");
-				
-				Log.d("Probando", "LO QUE ME PASA DAVID: "+resp_act);
-				
-				// TODO Mensaje para el handler
+
+				Log.d("Probando", "LO QUE ME PASA DAVID: " + resp_act);
+
+				// Mensaje para el handler
 				Message msg = handler.obtainMessage();
 				Bundle bundle = new Bundle();
 				bundle.putString("RESPUESTA", resp_act);

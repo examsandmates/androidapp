@@ -126,25 +126,20 @@ public class Grupos_info extends Activity {
 
 					// Mensaje para el handler
 					Message msg = handler.obtainMessage();
+					
 					Bundle bundle = new Bundle();
-
-					Log.d("Probando", "RECIBIMOS: " + gr_cre);
-					Log.d("Probando", "RECIBIMOS: " + gr_asign);
-					Log.d("Probando", "RECIBIMOS: " + gr_lug);
-					Log.d("Probando", "RECIBIMOS: " + gr_fec);
-					Log.d("Probando", "RECIBIMOS: " + gr_hor);
-
+					
 					bundle.putString("GR_CRE", gr_cre);
 					bundle.putString("GR_ASIGN", gr_asign);
 					bundle.putString("GR_LUG", gr_lug);
 					bundle.putString("GR_FEC", gr_fec);
 					bundle.putString("GR_HOR", gr_hor);
+					
 					msg.setData(bundle);
 					handler.sendMessage(msg);
 
 				}
 			} catch (Exception e) {
-				// TODO
 			}
 		}
 	}

@@ -106,14 +106,17 @@ public class Grupos extends ListActivity {
 			HttpClient client = new DefaultHttpClient();
 			HttpPost post = new HttpPost(
 					"http://examsandmates.web44.net/examapp/Grupos.php");
+			
 			try {
 				Log.d("Probando", "Dentro del try");
 				post.setEntity(null);
 				HttpResponse response = client.execute(post);
+				
 				if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
 					BufferedReader reader = new BufferedReader(
 							new InputStreamReader(response.getEntity()
 									.getContent()));
+					
 					String resp = "";
 					String linea;
 
@@ -140,7 +143,6 @@ public class Grupos extends ListActivity {
 					handler.sendMessage(msg);
 				}
 			} catch (Exception e) {
-				// TODO
 			}
 		}
 	}
